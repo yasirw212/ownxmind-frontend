@@ -1,0 +1,40 @@
+
+.hero {
+    height: 70vh;
+    width: 100vw;
+    background-image: url('../../assets/ownxmind.jpeg');
+    position: relative;
+    background-size: 100% 100%;
+    top: -5vh;
+}
+
+.home-body{
+    width: 100%;
+    max-width: 1100px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+
+.preview-container {
+    padding: 20px;
+    width: 100%;
+    max-width: 900px;
+    margin: 3rem auto 0 auto;
+    display: grid;
+    text-align: left;
+    display: grid;
+    grid-template: auto auto / repeat(2, 1fr);
+    grid-column-gap: 1.5rem;
+    grid-row-gap: 1.5rem;
+}
+
+.view-more-btn{
+
+}
+
+.view-more-btn:hover{
+    background: #131313;
+    color: #fff;
+    transition: ease-in-out .5s;
+}

@@ -1,0 +1,15 @@
+.search-input-div-active {
+    transform: translateX(15vw);
+    transition: ease-in-out 500ms;
+  }
+
+  .search-input-active {
+    width: 50vw;
+  }
+
+  @media  only screen and (max-width: 550px) {
+    .search-input {
+        width: 35vw
+  
+      }
+  }

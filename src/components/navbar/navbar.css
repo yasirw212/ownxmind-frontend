@@ -1,0 +1,42 @@
+.navbar-container {
+    position: fixed;
+    width: 100vw;
+    z-index: 4;
+  }
+  
+  .navbar-logo{
+      transform: rotate(35deg);
+      margin-right: .5em;
+  }
+  
+  .navbar-brand {
+      font-family: darkpix;
+  }
+  
+  .bag-icon:hover {
+    opacity: .8;
+  }
+  
+  @media (max-width: 800px) {
+    .navbar-items {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      background: #131313;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      top: 0;
+      transition: all 0.25s ease-in-out;
+      padding-top: 3em;
+      color: #fff;
+      font-size: 1.5rem;
+  
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+    .items-container{
+      max-width: 170px;
+    }
+  }

@@ -1,0 +1,11 @@
+.card-container{
+    text-align: center;
+}
+
+.item-btn-txt{
+    /* font-size: .75rem; */
+}
+
+@media only screen and (max-width: 550px){
+
+}

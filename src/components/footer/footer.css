@@ -1,0 +1,16 @@
+
+.footer-container{
+    position: relative;
+    height: 15vh;
+    top: 12.5vh;
+    width: 100%;
+    color: #131313;
+    text-align: center;
+    font-size: .75rem;
+    padding-bottom: 2rem;
+}
+
+
+.footer-container a {
+    color: #131313;
+}

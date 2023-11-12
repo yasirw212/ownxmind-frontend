@@ -1,0 +1,16 @@
+.breadcrumb{
+    width: 90%;
+    margin: 0 auto 1rem auto;
+}
+
+.related-img{
+    width: 100px;
+    height: 100px;
+}
+
+@media only screen and (min-width: 900px) {
+    .related-img{
+        width: 150px;
+        height: 150px;
+    }
+}
