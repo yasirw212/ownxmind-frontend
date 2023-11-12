@@ -25,8 +25,7 @@ const SideBar = () => {
 
    
    function placeOrder(){
-    console.log(lineItemsArray)
-    console.log(products)
+    
     let line_items = []
     items.forEach((item)=>{
         line_items.push(
@@ -108,7 +107,7 @@ const SideBar = () => {
                         <p className="">Estimated Total: </p>
                         <p className="price">{total.toFixed(2)}</p>
                     </div>
-                    <button  style={{color: '#fff', background:'#131313', fontSize: '1.1rem', padding: '.5em 1.75em', fontWeight: 'light'}} className="checkout-btn">Check Out <i className="bi bi-bag-fill  mx-3" style={{cursor:'pointer'}}></i></button>
+                    <button onClick={() => placeOrder()}  style={{color: '#fff', background:'#131313', fontSize: '1.1rem', padding: '.5em 1.75em', fontWeight: 'light'}} className="checkout-btn">Check Out <i className="bi bi-bag-fill  mx-3" style={{cursor:'pointer'}}></i></button>
                     <div style={{alignSelf: 'flex-start', marginTop: '1.5rem'}}>
                         <p style={{marginBottom: '.75em'}}>SECURE PAYMENT</p>
                         <FaCcVisa style={{fontSize: '2rem', margin: '0em .35em 0 0'}} />
