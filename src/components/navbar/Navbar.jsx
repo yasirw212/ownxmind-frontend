@@ -21,12 +21,12 @@ const Navbar = () => {
 
   const handleClickAway = () => {
     setAnchorEl(false);
-}
+    }
 
-const handleClick = (event) => {
-    setAnchorEl(anchorEl ? null : event.currentTarget);
-    
-};
+    const handleClick = (event) => {
+        setAnchorEl(anchorEl ? null : event.currentTarget);
+        
+    };
 
     const redirect = (param) =>{
         navigate({pathname: `/shop/${param}`})
@@ -60,11 +60,11 @@ const handleClick = (event) => {
         <nav className="navbar navbar-expand-md navbar-light p-3" style={{borderBottom: "3px solid #EAEAEA", position: 'fixed', zIndex: '4', width: '100vw', background: '#fff'}}>
             <div className="container" style={{display: 'flex', alignItems: 'center', width: '100vw', justifyContent: 'flex-end'}} >
                 <Box sx={{position: 'absolute', left: '5%', alignSelf: {xs: 'flex-start', sm: 'center'}}}>
-                    <a href="" style={{textDecoration: 'none', justifySelf: 'center'}}>
+                    <Link to={'/'} style={{textDecoration: 'none', justifySelf: 'center'}}>
                         <Typography variant={'h5'} sx={{color: '#131313', fontFamily: 'darkpix'}}>
                              OWN X MIND
                         </Typography>
-                    </a>
+                    </Link>
                 </Box>
                 <div className="" style={{display: 'flex', fontSize: '1.25rem'}}>
                     <div className="text-dark mx-3">
