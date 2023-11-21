@@ -11,8 +11,11 @@ export const useStyles = () => {
                 md: '20px 40px'
             },
             width: '90%',
-            maxWidth: '1300px',
-            margin: '0 auto',
+            // maxWidth: '1300px',
+            margin: {
+                xs: '0 auto',
+                xl: 'none'
+            },
             // background: 'pink'
         },
         productsContainer: {

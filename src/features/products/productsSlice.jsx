@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getAllProducts, getAllPhotos } from "../../api";
+import { hatsPhotos, bottomsPhotos, topsPhotos } from "../../data/data";
 
 export const getProducts = createAsyncThunk('/products/getProducts', async (arg, {rejectWithValuee}) => {
     try {
@@ -7,11 +8,12 @@ export const getProducts = createAsyncThunk('/products/getProducts', async (arg,
         
         if(data){
             const response = await getAllPhotos()
-            const photos = response.data
+            let photos = []
+            photos = [...photos, ...hatsPhotos, ...bottomsPhotos, ...topsPhotos]
             let obj = {hats: [], tops: [], bottoms: []}
             if(photos){
                 data.map(item =>{
-                    const itemPhotos = photos.filter(photo => photo.products_id == item.id)
+                    const itemPhotos = photos.filter(photo => photo.id == item.id)
                     item = {...item, photos: [...itemPhotos]}
                     if(item.category == 'hats'){
                         obj = {...obj, hats: [...obj.hats, item]}

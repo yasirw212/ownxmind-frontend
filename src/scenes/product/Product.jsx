@@ -9,7 +9,7 @@ import { adjustQuantityInCart } from '../../features/order/orderSlice'
 import { useStyles } from './styles'
 import { getProducts } from '../../features/products/productsSlice'
 import { Accordion, AccordionDetails, AccordionSummary }from '@mui/material'
-import { ExpandMore } from '@mui/icons-material'
+import { ExpandMore, MailOutline, Instagram } from '@mui/icons-material'
 
 
 const Product = () => {
@@ -97,8 +97,7 @@ const Product = () => {
             <Box sx={{display: {md: 'grid'}, gridTemplate: 'auto auto / 60% 35%', marginTop: '2rem'}}>
                 <Box sx={styles.imgContainer}>
                     {product.photos.length > 0 ?
-                        <Box sx={{backgroundImage: `url(${product.photos[0].file})`, width: '100%', backgroundPosition: 'center', height: {xs: '40vh', md: '60vh'}, backgroundSize: '100% 100%', backgroundColor: '#eaeaea', backgroundBlendMode: 'darken'}}></Box>
-                        // <img width={'100%'} src={product.photos[0].file} alt="" /> 
+                        <Box sx={{backgroundImage: `url(${product.photos[0].files[0]})`, width: '100%', backgroundPosition: 'center', height: {xs: '40vh', md: '60vh'}, backgroundSize: '100% 100%', backgroundColor: '#eaeaea', backgroundBlendMode: 'darken', maxWidth: {xs: '100%', xl: '80%'}}}></Box>
                     :
                         <Box></Box>
                     }
@@ -144,10 +143,16 @@ const Product = () => {
                                 <Typography>Contact Us</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <Typography></Typography>
+                                <Box sx={{display: 'flex'}}>
+                                    <MailOutline sx={{display: 'inline-flex'}} />: <p>ownmindtm@icloud.com</p>
+                                </Box>
+                                <Box sx={{display: 'flex'}}>
+                                    <Instagram sx={{display: 'inline-flex'}} />: <p>ownmind.co</p>
+                                </Box>
                             </AccordionDetails>
                         </Accordion>
                     </Box>
+                    
                     </Box>
                     <Box id={'button-div'} sx={{position: {xs: 'fixed', md: 'relative'}, bottom: 0, width: '100%', left: {md: '0'}, background: '#fff', display: 'flex', justifyContent: 'center'}}>
                         <Button className='add-item' id="add-btn" onClick={() => addToBag()} variant='contained' sx={{zIndex: '5', width: '80%', margin: {xs: '2rem 0 1rem 0', md: '1rem auto 2rem auto'} }}>Add To Bag</Button>
@@ -159,7 +164,7 @@ const Product = () => {
                     Related
                 </Typography>
                 <Box> 
-                    {relatedItems.slice(0, 2).map(item => <Link to={`/shop/${item.category}/${item.id}`} style={{marginRight: '1rem', marginTop: '.5rem', borderRadius: '8px'}}><img className={'related-img'} src={item.photos[0].file} alt="" /></Link> )}
+                    {relatedItems.slice(0, 2).map(item => <Link to={`/shop/${item.category}/${item.id}`} style={{marginRight: '1rem', marginTop: '.5rem', borderRadius: '8px'}}><img className={'related-img'} src={item.photos[0].files[0]} alt="" /></Link> )}
                 </Box>
             </Box>
         </>

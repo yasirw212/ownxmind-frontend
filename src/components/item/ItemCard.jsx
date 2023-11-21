@@ -5,16 +5,15 @@ import { useDispatch } from 'react-redux'
 import { adjustQuantityInCart } from '../../features/order/orderSlice'
 import './item.css'
 import { useStyles } from './styles'
-import hatImg from '../../assets/olivexblack1.png'
 
 const ItemCard = ({item, img, category, page}) => {
     const styles = useStyles()
     const dispatch = useDispatch()
 
   return (
-    <Card className='card-container' sx={{boxShadow: '0px 0px 5px #131313', background: item.category == 'hats' ? "#eaeaea" : '', border: item.category == 'hats' ? '7px solid #eaeaea' : ''}}>
-        <CardMedia sx={{maxWidth: {xs: '375px'}}}  /*sx={{backgroundImage: `url(${item.photos[0].file})`, backgroundSize: '100% 100%', height: page == 'home' ? '' : '200px', backgroundColor: '#eaeaea'}} */  >
-            <img width={'100%'}  height={item.category == 'hats' ? '150px' : '100%'} className='card-img' src={item.photos[0].file} alt="" />
+    <Card className='card-container' sx={{boxShadow: '0px 0px 5px #131313', background: item.category == 'hats' ? "" : '', border: item.category == 'hats' ? '7px solid #fff' : ''}}>
+        <CardMedia sx={{maxWidth: {xs: '375px'}}} >
+            <img width={'100%'}   className={`card-img ${item.category == 'hats' ? 'hat-img' : 'product-img'}`} src={item.photos[0].files[0]} alt="" />
         </CardMedia>
         <CardContent sx={styles.cardContent}>
             <Typography sx={styles.contentTypography}>

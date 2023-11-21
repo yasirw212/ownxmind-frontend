@@ -13,6 +13,7 @@ import { ThemeProvider} from "@mui/material"
 import { themeContext } from "../theme/theme"
 import SideBar from "../components/sidebar/SideBar"
 import $ from 'jquery'
+import Contact from "../components/contact/Contact"
 
 function App() {
   const dispatch = useDispatch()
@@ -37,6 +38,7 @@ function App() {
             <Route path="/shop/:category/:id" element={<Product />}></Route>
           </Routes>
           <SideBar />
+          <Contact />
         </main>
         <footer>
           <Footer />
