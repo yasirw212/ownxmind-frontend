@@ -116,11 +116,6 @@ const SideBar = () => {
                         <FaCcDiscover style={{fontSize: '2rem', margin: '.0em .35em 0 0'}} />
                         <FaCcApplePay style={{fontSize: '2rem', margin: '0em .35em 0 0'}} />
                     </div>
-                    {/* <div className="contact-container" style={{alignSelf: 'flex-start', marginTop: '.5em'}} >
-                        <p style={{fontSize: '1rem', margin: '.5em 0 0 0'}}>CONTACT US</p>
-                        <p style={{fontSize: '.85rem', margin: '.25em 0 0 0'}}>EMAIL: OWNMINDTM@ICLOUD.COM</p>
-                        <p style={{fontSize: '.85rem', margin: '.25em 0 0 0'}}>INSTAGRAM: OWNMIND.1</p>
-                    </div> */}
                 </div>
             }
         </div>

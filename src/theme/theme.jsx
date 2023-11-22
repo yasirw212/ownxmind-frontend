@@ -12,9 +12,7 @@ export const themeSettings = () => {
                 main: "#fff",
             },
             neutral: {
-                dark: "#d7d7d7",
-                main: "#d7d7d7",
-                light: "#d7d7d7"
+                dark: "#d7d7d7"
             },
             background: {
                 default: "#fff",

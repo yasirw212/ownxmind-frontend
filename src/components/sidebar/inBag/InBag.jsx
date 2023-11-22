@@ -11,7 +11,7 @@ const InBag = ({item}) => {
     <div className="item-card" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #d7d7d7', paddingBottom: '.25em', marginTop: ''}}>
         <div style={{display: 'flex', alignItems: 'center'}}>
             <div style={{display: 'flex', flexDirection: 'column'}}>
-                <img height={'75'} width={'100'} style={{borderRadius: '8px'}} src={item.photos[0].file} alt="" />
+                <img height={'75'} width={'100'} style={{borderRadius: '8px'}} src={item.photos[0].files[0]} alt="" />
                 
             </div>
             <div style={{marginLeft: '1.25em'}}>

@@ -172,9 +172,6 @@ input[type=email]::placeholder{
     transform: rotate(90deg);
   }
 
-
- 
-
   /* Shop Page */
 
   .search-input-div-active {
@@ -203,13 +200,6 @@ input[type=email]::placeholder{
       
   }
 }
-
-@media only screen and(max-width: 375px) {
-  .item-preview-btn {
-    /* font-size: 8px; */
-  }
-}
-
   /* Product Page */
   .img-container {
     width: 100%;

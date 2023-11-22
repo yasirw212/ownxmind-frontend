@@ -36,7 +36,6 @@ export const useStyles = () => {
             lg: '70%'
         },
         margin: '0 auto',
-        // background: 'pink'
        },
        cardContent: {
 

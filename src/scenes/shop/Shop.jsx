@@ -12,7 +12,6 @@ const Shop = () => {
     const [categoryItems, setCategoryItems] = React.useState([])
     const [filteredItems, setFilteredItems] = React.useState(categoryItems)
     const [searchParameter, setSearchParameter] = React.useState('')
-    // const [searchFilter, setSearchFilter] = React.useState(' ')
     const products = useSelector(selectProducts)
     const styles = useStyles()
     const params = useParams()
@@ -43,13 +42,10 @@ const Shop = () => {
         document.getElementById('search-input').value = ''
         if(params.category == 'hats'){
             setCategoryItems(products.hats)
-            // setFilteredItems(categoryItems)
         } else if(params.category == 'bottoms'){
             setCategoryItems(products.bottoms)
-            // setFilteredItems(categoryItems)
         } else if(params.category == 'tops'){
             setCategoryItems(products.tops)
-            // setFilteredItems(categoryItems)
         }
     }, [params])
 
@@ -71,9 +67,7 @@ const Shop = () => {
                         <input onChange={() => handleChange()}  onKeyUp={(e)=> searchBarActive(e)} id="search-input" className="p-2 search-input" style={{color: '#131313', border: '1px solid #DBDBDB'}} type="text" placeholder="Search"/>
                     </div>
                 </div>
-        <Box classNam={''}>
-            
-        </Box>
+        <Box></Box>
         <Box sx={styles.productsContainer}>
             {filteredItems.length > 0 ? filteredItems.map(item => <ItemCard item={item} category={params.category} />) :filteredItems.map(item => <ItemCard item={item} category={params.category} />) }
         </Box>

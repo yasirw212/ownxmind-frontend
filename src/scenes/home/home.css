@@ -29,10 +29,6 @@
     grid-row-gap: 1.5rem;
 }
 
-.view-more-btn{
-
-}
-
 .view-more-btn:hover{
     background: #131313;
     color: #fff;

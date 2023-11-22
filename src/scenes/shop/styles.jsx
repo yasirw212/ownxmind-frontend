@@ -11,12 +11,10 @@ export const useStyles = () => {
                 md: '20px 40px'
             },
             width: '90%',
-            // maxWidth: '1300px',
             margin: {
                 xs: '0 auto',
                 xl: 'none'
-            },
-            // background: 'pink'
+            }
         },
         productsContainer: {
             display: 'grid',
@@ -31,7 +29,6 @@ export const useStyles = () => {
                 md: '1.5rem'
             },
             marginTop: '2.5rem'
-            // margin: '0 auto'
         }
     }
 }

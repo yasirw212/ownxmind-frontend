@@ -15,8 +15,6 @@
     padding: 20px 40px;
     overflow-y: scroll;
     height: 100%;
-    /* display: grid; */
-    /* grid-template: 12.5% 62.5% 20%  / 1fr; */
     display: none;
     
 }
@@ -40,7 +38,6 @@
 
 .order-sidebar-body {
     max-width: 100%;
-    /* overflow-y: scroll; */
 }
 
 .item-name {
@@ -63,7 +60,6 @@
     flex-direction: column;
     align-items: center;
     margin-top: 1em;
-    /* font-family: sans-serif; */
 }
 
 .total-container,
@@ -76,7 +72,6 @@
 }
 
 .total-container p {
-    /* font-weight: 700; */
     font-size: 1rem;
 }
 

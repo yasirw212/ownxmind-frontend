@@ -2,13 +2,11 @@ import React from 'react'
 import { useNavigate } from 'react-router'
 import { Popper, Box, Button, useTheme, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { useStyles } from './muiStyles'
 import $ from 'jquery'
 import './navbar.css'
 
 
 const Navbar = () => {
-    const styles = useStyles()
     const theme = useTheme()
     
     function navbarActive(){
