@@ -46,6 +46,7 @@ import bluePants from '../assets/bluepants.jpeg'
 import greenPants from '../assets/greenpants.jpeg'
 import redPants from '../assets/redpants.jpeg'
 import blackPants from '../assets/blackpants.jpeg'
+import pinkPants from '../assets/pinkpants.jpeg'
 
 // Shirts
 import blackShirt1 from '../assets/blackshirt1.jpeg'
@@ -118,5 +119,9 @@ export const bottomsPhotos = [
         id: "6700c2f3-061c-4740-85d0-fe9a53331d8b",
         files: [greenPants, greenPants, greenPants, greenPants]
     },
+    {
+        id: "8be58bfc-9fbf-41bd-9626-a042b0e0a70a",
+        files: [pinkPants, pinkPants, pinkPants, pinkPants]
+    }
     
 ]
