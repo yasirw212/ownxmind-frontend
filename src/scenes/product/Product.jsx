@@ -125,7 +125,7 @@ const Product = () => {
             
             <Box sx={{display: {md: 'grid'}, gridTemplate: 'auto auto / 60% 35%', marginTop: '2rem', maxHeight: '900px', overflow: 'hidden'}}>
                 <Box sx={styles.imgContainer}>
-                    { product.photos.length > 0 && params.category == 'hats' ?
+                    { product.photos.length > 0 && params.category == 'hats' && window.innerWidth > 600 ?
                         <Box sx={styles.imgDisplay}>
                             <Box sx={{backgroundImage: `url(${product.photos[0].files[0]})`, width: '100%', backgroundPosition: 'center', backgroundSize: '100% 100%', backgroundColor: '#eaeaea', backgroundBlendMode: 'darken', display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', minHeight: {md: '200px', lg: '300px'}}}><IconButton className='show-img' onClick={(e) => showModal(e, product.photos[0].files[0])} ><ZoomIn sx={{color: '#d7d7d7', textShadow: '0px 0px 25px #000'}} /></IconButton></Box>
                             <Box sx={{backgroundImage: `url(${product.photos[0].files[1]})`, width: '100%', backgroundPosition: 'center', backgroundSize: '100% 100%', backgroundColor: '#eaeaea', backgroundBlendMode: 'darken',  display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', minHeight: {md: '200px', lg: '300px'}}}><IconButton className='show-img' onClick={(e) => showModal(e, product.photos[0].files[1])}><ZoomIn sx={{color: '#d7d7d7', textShadow: '0px 0px 15px #000'}} /></IconButton></Box>
