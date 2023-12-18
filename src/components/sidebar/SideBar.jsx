@@ -56,16 +56,6 @@ const SideBar = () => {
       dispatch(getTotal())
    }, [items])
 
-   $(document).ready(() => { 
-    $('.close-sidebar').on('click', () => {
-        $('.order-sidebar').fadeOut(400)
-    })
-
-    $('.add-item').on('click', () => {
-      $('.order-sidebar').fadeIn(500)
-    })
-}) 
-
   return (
     <div className="order-sidebar">
             <div className="order-sidebar-header">

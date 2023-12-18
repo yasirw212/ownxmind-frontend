@@ -29,6 +29,21 @@ export const useStyles = () => {
                 md: '1.5rem'
             },
             marginTop: '2.5rem'
+        },
+        hatsContainer: {
+            display: 'grid',
+            width: '100%',
+            gridTemplate: {
+                xs: 'auto auto / repeat(2, 1fr)',
+                sm: 'auto auto / repeat(3, 1fr)',
+                lg: 'auto auto / repeat(5, 1fr)',
+                xl: 'auto auto / repeat(6, 1fr)'
+            },
+            gridGap: {
+                xs: '1rem',
+                md: '1.5rem'
+            },
+            marginTop: '2.5rem'
         }
     }
 }

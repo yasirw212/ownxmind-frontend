@@ -38,7 +38,7 @@ const Shop = () => {
     }
 
     React.useEffect(() => {
-        setFilteredItems([])
+        
         document.getElementById('search-input').value = ''
         if(params.category == 'hats'){
             setCategoryItems(products.hats)
@@ -68,7 +68,7 @@ const Shop = () => {
                     </div>
                 </div>
         <Box></Box>
-        <Box sx={styles.productsContainer}>
+        <Box sx={ params.category !== 'hats' ? styles.productsContainer : styles.hatsContainer}>
             {filteredItems.length > 0 ? filteredItems.map(item => <ItemCard item={item} category={params.category} />) :filteredItems.map(item => <ItemCard item={item} category={params.category} />) }
         </Box>
     </Box>

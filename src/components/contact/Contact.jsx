@@ -12,7 +12,7 @@ export default function Contact(props){
                         <button type="button" className="btn-close btn-light" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body text-center">
-                        <form  name="contact" method="POST" data-netlify="true" onSubmit={"submit"} >
+                        <form  name="contact" method="POST" >
                             <div className="mt-2 text-start">
                                 <label  className=" form-label">First Name</label>
                                 <input name="firstName" type="text" className="form-control" placeholder="John" />

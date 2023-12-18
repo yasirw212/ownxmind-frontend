@@ -1,11 +1,25 @@
-import { ContactlessOutlined } from "@mui/icons-material";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { retrieveSessionData, updateSessionData } from "../../api";
+
+export const retrieveData = createAsyncThunk("/order/retrieveData", async (arg, {rejectWithValue}) => {
+    try {
+        const {data} = await retrieveSessionData()
+        return data.order
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+
 
 const options = {
     name: 'order',
     initialState: {
         items: [],
-        total: 0
+        cartQuantity: 0,
+        total: 0,
+        loadingData: false,
+        failedToLoadData: false
     },
     reducers: {
         getTotal: (state, {payload}) => {
@@ -15,7 +29,7 @@ const options = {
             }
             state.total = total
         },
-        adjustQuantityInCart: (state, {payload}) => {
+        adjustItemQuantity: (state, {payload}) => {
             let itemsArr = [...state.items]
             const {id, name, price, photos, stripe_code} = payload.product
             console.log(payload)
@@ -35,19 +49,40 @@ const options = {
                 }
             } else {
                 itemsArr.push({id: id, name: name, price: price, photos: photos, quantityInCart: 1, productCode: stripe_code})
-                console.log(itemsArr)
             }
-            console.log(itemsArr)
             state.items = [...itemsArr]
-            console.log(state.items)
+            updateSessionData(itemsArr)
+        },
+        updateCartQuantity: (state, {payload}) => {
+            let numItems = 0
+            console.log(state.cartQuantity)
+            state.items.map(item => numItems += item.quantityInCart)
+            state.cartQuantity = numItems                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+        } 
+    },
+    extraReducers: {
+        [retrieveData.pending]: (state, {payload}) => {
+            state.loadingData = true,
+            state.failedToLoadData = false
+        },
+        [retrieveData.fulfilled]: (state, {payload}) => {
+            state.loadingData = false
+            console.log(payload)
+            state.items = [...payload]
+            state.failedToLoadData = false
+        },
+        [retrieveData.rejected]: (state, {payload}) => {
+            state.loadingData = false
+            state.failedToLoadData = true
         }
     }
 }
 
 const orderSlice = createSlice(options)
-export const {adjustQuantityInCart, getTotal} = orderSlice.actions
+export const {adjustItemQuantity, getTotal, updateCartQuantity} = orderSlice.actions
 export const selectItems = state => state.order.items
 export const selectTotal = state => state.order.total
+export const selectCartQuantity = state => state.order.cartQuantity
 
 
 export default orderSlice.reducer

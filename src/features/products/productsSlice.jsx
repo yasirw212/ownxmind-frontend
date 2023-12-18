@@ -2,17 +2,18 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getAllProducts, getAllPhotos } from "../../api";
 import { hatsPhotos, bottomsPhotos, topsPhotos } from "../../data/data";
 
-export const getProducts = createAsyncThunk('/products/getProducts', async (arg, {rejectWithValuee}) => {
+export const getProducts = createAsyncThunk('/products/getProducts', async (arg, {rejectWithValue}) => {
     try {
         const {data} = await getAllProducts()
         
         if(data){
             const response = await getAllPhotos()
             let photos = []
-            photos = [...photos, ...hatsPhotos, ...bottomsPhotos, ...topsPhotos]
+            photos = [...hatsPhotos, ...bottomsPhotos, ...topsPhotos]
             let obj = {hats: [], tops: [], bottoms: []}
             if(photos){
                 data.map(item =>{
+                    console.log(photos)
                     const itemPhotos = photos.filter(photo => photo.id == item.id)
                     item = {...item, photos: [...itemPhotos]}
                     if(item.category == 'hats'){
@@ -24,7 +25,6 @@ export const getProducts = createAsyncThunk('/products/getProducts', async (arg,
                     }
                     
                 })
-                console.log(obj)
                 return obj
             }
         }
@@ -52,6 +52,7 @@ const options = {
         [getProducts.fulfilled]: (state, {payload}) => {
             state.isLoadingProducts = false
             state.products = {...payload}
+            console.log(payload)
             state.failedToGetProducts = false
         },
         [getProducts.rejected]: (state, {payload}) => {

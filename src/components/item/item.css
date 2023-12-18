@@ -3,7 +3,13 @@
 }
 
 .hat-img {
-    height: 250px;
+    height: 300px;
+}
+
+@media only screen and (max-width: 1100px){
+    .hat-img {
+        height: 250px;
+    }
 }
 
 @media only screen and (max-width: 550px){

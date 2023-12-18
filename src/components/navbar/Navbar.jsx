@@ -1,14 +1,16 @@
 import React from 'react'
 import { useNavigate } from 'react-router'
-import { Popper, Box, Button, useTheme, Typography } from '@mui/material'
+import { Popper, Box, Button, useTheme, Typography, Badge } from '@mui/material'
 import { Link } from 'react-router-dom'
+import { selectCartQuantity } from '../../features/order/orderSlice'
+import { useSelector } from 'react-redux'
 import $ from 'jquery'
 import './navbar.css'
 
 
 const Navbar = () => {
     const theme = useTheme()
-    
+    const cartQuantity = useSelector(selectCartQuantity)
     function navbarActive(){
         document.querySelector('.navbar-items').classList.toggle('active')
     }
@@ -66,7 +68,9 @@ const Navbar = () => {
                 </Box>
                 <div className="" style={{display: 'flex', fontSize: '1.25rem'}}>
                     <div className="text-dark mx-3">
-                        <i className="bi bi-bag-fill bag-icon" style={{cursor:'pointer'}}></i>
+                        <Badge badgeContent={cartQuantity} >
+                            <i className="bi bi-bag-fill bag-icon" style={{cursor:'pointer'}}></i>
+                        </Badge>
                     </div>
                     <button style={{zIndex: '99'}} className="navbar-toggler" onClick={()=> navbarActive()} data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span className="navbar-toggler-icon"></span>
@@ -75,9 +79,6 @@ const Navbar = () => {
                 <div style={{justifySelf: 'flex-end'}} className="collapse navbar-collapse  items-container" id="navbarCollapse">
                     <ul className="nav navbar-nav " style={{display: 'flex', alignItems: 'center'}}>
                         <li className="nav-item" data-bs-dismiss="collapse" style={{marginTop: {sm: '5rem'}}}><Button sx={{fontFamily: 'serif', fontSize: '1.1rem'}}><Link to='/' className="nav-link text-dark text-center">HOME</Link></Button></li>
-                        {/* <li className="nav-item" data-bs-dismiss="collapse" style={{marginTop: {sm: '5rem'}}}><Button sx={{fontFamily: 'serif', fontSize: '1.1rem'}}><Link to='/shop' className="nav-link text-dark text-center">SHOP</Link></Button></li> */}
-                        {/* <li className="nav-item"><Link to='/shop' className="nav-link text-dark">Shop</Link></li> */}
-                        {/* <li className="nav-item text-dark nav-link" style={{margin: "0 auto"}}> */}
                         <Button color={'primary'} aria-describedby={id} type="button" onClick={handleClick} sx={{fontFamily: 'serif', fontSize: '1.1rem'}}>
                             SHOP
                         </Button>
@@ -89,9 +90,7 @@ const Navbar = () => {
                                     <li><Button onClick={() => redirect('hats')}>Hats</Button></li>
                                 </ul>
                             </Box>
-                           
                         </Popper>
-                        {/* </li> */}
                     </ul>
                 </div>
             </div>

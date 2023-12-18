@@ -12,14 +12,19 @@ export const useStyles = () => {
         },
         imgContainer: {
             display: {
-                xs: 'flex',
                 md: 'grid'
             },
-            // width: {
-            //     md: '80%'
-            // },
             width: '90%',
-            margin: '0 auto'
+            margin: '0 auto',
+            overFlow: 'hidden'
+        },
+        imgDisplay: {
+            width: '90%',
+            display: {
+                md: 'grid'
+            },
+            gridTemplate: 'auto auto / repeat(2, 1fr)',
+            gridGap: '1rem'
         }
     }
 }

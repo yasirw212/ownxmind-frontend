@@ -1,20 +1,23 @@
 import React from 'react'
 import './product.css'
-import { Box, List, ListItem, ListItemText, Typography, Button  } from '@mui/material'
+import { Box, List, ListItem, ListItemText, Typography, Button, IconButton, Container } from '@mui/material'
 import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import { selectProducts } from '../../features/products/productsSlice'
 import { useSelector, useDispatch } from 'react-redux'
-import { adjustQuantityInCart } from '../../features/order/orderSlice'
+import { adjustItemQuantity } from '../../features/order/orderSlice'
 import { useStyles } from './styles'
 import { getProducts } from '../../features/products/productsSlice'
 import { Accordion, AccordionDetails, AccordionSummary }from '@mui/material'
-import { ExpandMore, MailOutline, Instagram } from '@mui/icons-material'
+import { ExpandMore, MailOutline, Instagram, ZoomIn, Close } from '@mui/icons-material'
+import $, { event, ready } from 'jquery'
 
 
 const Product = () => {
     const [product, setProduct] = React.useState({photos: []})
     const [relatedItems, setRelatedItems] = React.useState([])
+    // const [modalVisible, setModalVisible] = React.useState(false)
+    const [modalImg, setModalImg] = React.useState('')
     const [count, setCount] = React.useState(0)
     const products = useSelector(selectProducts)
     const params = useParams()
@@ -22,8 +25,18 @@ const Product = () => {
     const dispatch = useDispatch()
 
     const addToBag = () => {
-        dispatch(adjustQuantityInCart({product: product, method: '+', quantity: 1}))
+        dispatch(adjustItemQuantity({product: product, method: '+', quantity: 1}))
     }
+
+    $(document).ready(() => { 
+        $('.close-sidebar').on('click', () => {
+            $('.order-sidebar').fadeOut(400)
+        })
+      
+        $('.add-item').on('click', () => {
+            $('.order-sidebar').fadeIn(500)
+        })
+      }) 
 
     const handleScreenPos = () => {
         if(window.scrollY > 65){
@@ -72,9 +85,20 @@ const Product = () => {
         }
     }
 
+    const showModal = (event, img) => {
+        console.log(event)
+        $(document).ready(() => {
+            $('.show-img').on('click', () => $('.modal-div').addClass('active'))
+        })
+        setModalImg(img)
+    }
+
+    $(document).ready(() => {
+        $('.close-modal').on('click', () => $('.modal-div').removeClass('active'))
+    })
+
     React.useEffect(() => {
         getProduct()
-        console.log(product)
     }, [products, params])
 
     React.useEffect(() => {
@@ -87,6 +111,10 @@ const Product = () => {
        {
         product ?
         <>
+        <Box className='modal-div' sx={{background: 'rgba(0, 0, 0, .5)',  position: 'fixed', top: 0, right: 0, left: '0%', bottom: 0,  zIndex: 999, justifyContent: 'center', height: '100vh', width: '100vw'}}>
+            <IconButton className='close-modal' onClick={() => setModalVisible(false)} sx={{position: 'absolute', right: '3%', top: '3%'}} ><Close sx={{color: '#d7d7d7'}} /></IconButton>
+            <img src={modalImg} alt="" className='modal-img' style={{margin: '0 auto', position: 'relative'}} />
+        </Box>
             <nav className='pt-4'>
                 <ol className="breadcrumb" separator={'>'}>
                     <li style={{margin: '0', padding: 0}}   className="breadcrumb-item "><Link className="text-dark" to={'/'}>OWN X MIND</Link></li>
@@ -94,11 +122,20 @@ const Product = () => {
                     <li className="breadcrumb-item active">{product.name}</li>
                 </ol>
             </nav>
-            <Box sx={{display: {md: 'grid'}, gridTemplate: 'auto auto / 60% 35%', marginTop: '2rem'}}>
+            
+            <Box sx={{display: {md: 'grid'}, gridTemplate: 'auto auto / 60% 35%', marginTop: '2rem', maxHeight: '900px', overflow: 'hidden'}}>
                 <Box sx={styles.imgContainer}>
-                    {product.photos.length > 0 ?
-                        <Box sx={{backgroundImage: `url(${product.photos[0].files[0]})`, width: '100%', backgroundPosition: 'center', height: {xs: '40vh', md: '60vh'}, backgroundSize: '100% 100%', backgroundColor: '#eaeaea', backgroundBlendMode: 'darken', maxWidth: {xs: '100%', xl: '80%'}}}></Box>
+                    { product.photos.length > 0 && params.category == 'hats' ?
+                        <Box sx={styles.imgDisplay}>
+                            <Box sx={{backgroundImage: `url(${product.photos[0].files[0]})`, width: '100%', backgroundPosition: 'center', backgroundSize: '100% 100%', backgroundColor: '#eaeaea', backgroundBlendMode: 'darken', display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', minHeight: {md: '200px', lg: '300px'}}}><IconButton className='show-img' onClick={(e) => showModal(e, product.photos[0].files[0])} ><ZoomIn sx={{color: '#d7d7d7', textShadow: '0px 0px 25px #000'}} /></IconButton></Box>
+                            <Box sx={{backgroundImage: `url(${product.photos[0].files[1]})`, width: '100%', backgroundPosition: 'center', backgroundSize: '100% 100%', backgroundColor: '#eaeaea', backgroundBlendMode: 'darken',  display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', minHeight: {md: '200px', lg: '300px'}}}><IconButton className='show-img' onClick={(e) => showModal(e, product.photos[0].files[1])}><ZoomIn sx={{color: '#d7d7d7', textShadow: '0px 0px 15px #000'}} /></IconButton></Box>
+                            <Box sx={{backgroundImage: `url(${product.photos[0].files[2]})`, width: '100%', backgroundPosition: 'center',  backgroundSize: '100% 100%', backgroundColor: '#eaeaea', backgroundBlendMode: 'darken',  display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', minHeight: {md: '200px', lg: '300px'}}}><IconButton className='show-img' onClick={(e) => showModal(e, product.photos[0].files[2])}><ZoomIn sx={{color: '#d7d7d7', textShadow: '0px 0px 15px #000'}} /></IconButton></Box>
+                            <Box sx={{backgroundImage: `url(${product.photos[0].files[3]})`, width: '100%', backgroundPosition: 'center',  backgroundSize: '100% 100%', backgroundColor: '#eaeaea', backgroundBlendMode: 'darken',  display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', minHeight: {md: '200px', lg: '300px'}}}><IconButton className='show-img' onClick={(e) => showModal(e, product.photos[0].files[3])}><ZoomIn sx={{color: '#d7d7d7', textShadow: '0px 0px 15px #000'}} /></IconButton></Box>
+                        </Box>
                     :
+                        product.photos.length > 0 ? 
+                        <Box sx={{backgroundImage: `url(${product.photos[0].files[0]})`, width: '100%', backgroundPosition: 'center', height: {xs: '40vh', md: '60vh'}, backgroundSize: '100% 100%', backgroundColor: '#eaeaea', backgroundBlendMode: 'darken', maxWidth: {xs: '100%', xl: '80%'}, display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', }}><IconButton className='show-img' onClick={(e) => showModal(e, product.photos[0].files[0])} ><ZoomIn sx={{color: '#d7d7d7', textShadow: '0px 0px 25px #000'}} /></IconButton></Box>
+                        :
                         <Box></Box>
                     }
                 </Box>
@@ -155,11 +192,11 @@ const Product = () => {
                     
                     </Box>
                     <Box id={'button-div'} sx={{position: {xs: 'fixed', md: 'relative'}, bottom: 0, width: '100%', left: {md: '0'}, background: '#fff', display: 'flex', justifyContent: 'center'}}>
-                        <Button className='add-item' id="add-btn" onClick={() => addToBag()} variant='contained' sx={{zIndex: '5', width: '80%', margin: {xs: '2rem 0 1rem 0', md: '1rem auto 2rem auto'} }}>Add To Bag</Button>
+                        <Button className='add-item' id="add-btn" onClick={() => addToBag()}  variant='contained' sx={{zIndex: '5', width: '80%', margin: {xs: '2rem 0 1rem 0', md: '1rem auto 2rem auto'} }}>Add To Bag</Button>
                     </Box>
                 </Box>
             </Box>
-            <Box sx={{maxWidth: '1300', width: '90%', margin: '1rem auto 0 auto'}}>
+            <Box sx={{maxWidth: '1300', width: '90%', margin: '0rem auto 0 auto'}}>
                 <Typography variant={'h5'} sx={{fontFamily: 'darkPix', textAlign: {xs: 'left'}, marginTop: {md: '3rem'}, marginBottom: '.5rem'}}>
                     Related
                 </Typography>

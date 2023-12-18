@@ -3,6 +3,7 @@ import { nanoid } from '@reduxjs/toolkit'
 import olivexblack1 from '../assets/olivexblack4.jpeg'
 import olivexblack2 from '../assets/olivexblack2.jpeg'
 import olivexblack3 from '../assets/olivexblack3.jpeg'
+import olivexblack4 from '../assets/olivexblack1.jpeg'
 
 // Brown X Creme
 import brownxcreme1 from '../assets/brownxcreme1.jpeg'
@@ -71,7 +72,7 @@ export const hatsPhotos = [
 
     {
         id: "8cac7f44-6552-4b41-94aa-2214dc7574df",
-        files: [olivexblack1, olivexblack2, olivexblack3]
+        files: [olivexblack1, olivexblack2, olivexblack3, olivexblack4]
     },
 
     {

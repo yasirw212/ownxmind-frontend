@@ -1,7 +1,7 @@
 import React from 'react'
 import { Remove, Add } from '@mui/icons-material'
 import { IconButton, Button } from '@mui/material'
-import { adjustQuantityInCart } from '../../../features/order/orderSlice'
+import { adjustItemQuantity } from '../../../features/order/orderSlice'
 import { useDispatch } from 'react-redux'
 
 const InBag = ({item}) => {
@@ -18,11 +18,11 @@ const InBag = ({item}) => {
                 <p className="item-title" style={{marginTop: '1rem', fontFamily: 'darkpix'}} >{item.name}</p>
                 <div className="price" style={{display: 'flex'}}>
 
-                    <IconButton  onClick={()=> dispatch(adjustQuantityInCart({product: item, method: '-', quantity: 1}))} >
+                    <IconButton  onClick={()=> dispatch(adjustItemQuantity({product: item, method: '-', quantity: 1}))} >
                         <Remove sx={{fontSize: '1.2rem'}} />
                     </IconButton>
                     <p className="item-quanity mt-2" style={{fontSize: '1rem'}}>{`${item.quantityInCart}`}</p>
-                    <IconButton onClick={() => dispatch(adjustQuantityInCart({product: item, method: '+', quantity: 1}))} >
+                    <IconButton onClick={() => dispatch(adjustItemQuantity({product: item, method: '+', quantity: 1}))} >
                         <Add sx={{fontSize: '1.2rem'}} />  
                     </IconButton>
                 </div>
@@ -30,7 +30,7 @@ const InBag = ({item}) => {
         </div>
         <div className="description" style={{display: 'flex', flexDirection: 'column'}}>
             <p className="item-total">${`${(Number(item.price) * Number(item.quantityInCart)).toFixed(2)}`}</p>
-            <Button onClick={()=>dispatch(adjustQuantityInCart({product: item, method: '-', quantity: 0}))}  sx={{color: '#131313'}}>REMOVE</Button>
+            <Button onClick={()=>dispatch(adjustItemQuantity({product: item, method: '-', quantity: 0}))}  sx={{color: '#131313'}}>REMOVE</Button>
         </div>
     </div>
   )

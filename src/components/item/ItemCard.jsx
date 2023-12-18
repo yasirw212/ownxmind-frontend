@@ -2,16 +2,27 @@ import React from 'react'
 import {Box, Card, CardMedia, CardContent, CardActions, Typography, Button} from '@mui/material'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { adjustQuantityInCart } from '../../features/order/orderSlice'
+import { adjustItemQuantity } from '../../features/order/orderSlice'
 import './item.css'
 import { useStyles } from './styles'
+import $ from 'jquery'
 
 const ItemCard = ({item, img, category, page}) => {
     const styles = useStyles()
     const dispatch = useDispatch()
 
+    $(document).ready(() => { 
+        $('.close-sidebar').on('click', () => {
+            $('.order-sidebar').fadeOut(400)
+        })
+      
+        $('.add-item').on('click', () => {
+        $('.order-sidebar').fadeIn(500)
+        })
+      }) 
+
   return (
-    <Card className='card-container' sx={{boxShadow: '0px 0px 5px #131313', background: item.category == 'hats' ? "" : '', border: item.category == 'hats' ? '7px solid #fff' : ''}}>
+    <Card key={item.id} className='card-container' sx={{boxShadow: '0px 0px 5px #131313', background: item.category == 'hats' ? "" : '', border: item.category == 'hats' ? '7px solid #fff' : ''}}>
         <CardMedia sx={{maxWidth: {xs: '375px'}}} >
             <img width={'100%'}   className={`card-img ${item.category == 'hats' ? 'hat-img' : 'product-img'}`} src={item.photos[0].files[0]} alt="" />
         </CardMedia>
@@ -24,7 +35,7 @@ const ItemCard = ({item, img, category, page}) => {
             </Typography>
         </CardContent>
         <CardActions sx={styles.cardActions}>
-            <Button sx={page == 'home' ? styles.homeButton : styles.button} className={'add-item'} onClick={() => dispatch(adjustQuantityInCart({product: item, method: '+', quantity: 1}))} variant="contained"   >
+            <Button sx={page == 'home' ? styles.homeButton : styles.button} className={'add-item'} onClick={() => dispatch(adjustItemQuantity({product: item, method: '+', quantity: 1}))} variant="contained"   >
                 <Typography  sx={styles.buttonText}>
                     Add to cart
                 </Typography>
