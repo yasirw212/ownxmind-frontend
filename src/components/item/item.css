@@ -1,5 +1,6 @@
 .card-container{
     text-align: center;
+    background: #d7d7d7;
 }
 
 .hat-img {
@@ -14,6 +15,6 @@
 
 @media only screen and (max-width: 550px){
     .hat-img {
-        height: 150px;
+        height: 175px;
     }
 }

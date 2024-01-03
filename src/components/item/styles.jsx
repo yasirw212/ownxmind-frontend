@@ -38,7 +38,7 @@ export const useStyles = () => {
         margin: '-.35rem auto',
        },
        cardContent: {
-            paddingTop: ''
+            paddingTop: '',
        },
        contentTypography: {
             fontSize: {
