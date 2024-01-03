@@ -105,23 +105,23 @@ export const hatsPhotos = [
 export const bottomsPhotos = [
     {
         id: "5e4ed283-c027-4543-8ecb-db735f9fa484",
-        files: [bluePants, bluePants, bluePants, bluePants]
+        files: [bluePants]
     },
     {
         id: "2eb85eea-a20c-4219-9807-77c7c2039769",
-        files: [redPants, redPants, redPants, redPants]
+        files: [redPants]
     },
     {
         id: "f823d136-ad65-4dfb-ba09-bc07267fb3e0",
-        files: [blackPants, blackPants, blackPants, blackPants]
+        files: [blackPants]
     },
     {
         id: "6700c2f3-061c-4740-85d0-fe9a53331d8b",
-        files: [greenPants, greenPants, greenPants, greenPants]
+        files: [greenPants]
     },
     {
         id: "8be58bfc-9fbf-41bd-9626-a042b0e0a70a",
-        files: [pinkPants, pinkPants, pinkPants, pinkPants]
+        files: [pinkPants]
     }
     
 ]

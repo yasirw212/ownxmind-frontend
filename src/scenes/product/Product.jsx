@@ -14,7 +14,7 @@ import $ from 'jquery'
 
 
 const Product = () => {
-    const [product, setProduct] = React.useState({photos: []})
+    const [product, setProduct] = React.useState({photos: [{files: []}], details: []})
     const [relatedItems, setRelatedItems] = React.useState([])
     const [width, setWidth] = React.useState(0)
     const [modalImg, setModalImg] = React.useState('')
@@ -23,7 +23,7 @@ const Product = () => {
     const params = useParams()
     const styles = useStyles()
     const dispatch = useDispatch()
-
+    console.log(product)
     const addToBag = async () => {
         if(!size){
             dispatch(adjustItemQuantity({product: {...product, selectedSize: {size: params.category == "hats" ? null : "medium", stripe_code: params.category == "hats" ? product.sizes[0].stripe_code : product.sizes[2].stripe_code}}, method: '+', quantity: 1}))
@@ -122,20 +122,29 @@ const Product = () => {
                 </ol>
             </nav>
             
-            <Box sx={{display: {md: 'grid'}, gridTemplate: 'auto auto / 60% 35%', marginTop: '2rem', maxHeight: '900px', overflow: 'hidden'}}>
+            <Box sx={{display: {sm: 'grid'}, gridTemplate: 'auto auto / 60% 35%', marginTop: '2rem'}}>
                 <Box sx={styles.imgContainer}>
-                    { product.photos.length > 0 && params.category == 'hats' && width > 600 ?
+                    { product?.photos.length > 0 && product?.photos[0].files.length > 1 ?
                         <Box sx={styles.imgDisplay}>
-                            <Box sx={{backgroundImage: `url(${product.photos[0].files[0]})`, width: '100%', backgroundPosition: 'center', backgroundSize: '100% 100%', backgroundColor: '#eaeaea', backgroundBlendMode: 'darken', display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', minHeight: {md: '200px', lg: '300px'}}}><IconButton className='show-img' onClick={(e) => showModal(e, product.photos[0].files[0])} ><ZoomIn sx={{color: '#d7d7d7', textShadow: '0px 0px 25px #000'}} /></IconButton></Box>
-                            <Box sx={{backgroundImage: `url(${product.photos[0].files[1]})`, width: '100%', backgroundPosition: 'center', backgroundSize: '100% 100%', backgroundColor: '#eaeaea', backgroundBlendMode: 'darken',  display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', minHeight: {md: '200px', lg: '300px'}}}><IconButton className='show-img' onClick={(e) => showModal(e, product.photos[0].files[1])}><ZoomIn sx={{color: '#d7d7d7', textShadow: '0px 0px 15px #000'}} /></IconButton></Box>
-                            <Box sx={{backgroundImage: `url(${product.photos[0].files[2]})`, width: '100%', backgroundPosition: 'center',  backgroundSize: '100% 100%', backgroundColor: '#eaeaea', backgroundBlendMode: 'darken',  display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', minHeight: {md: '200px', lg: '300px'}}}><IconButton className='show-img' onClick={(e) => showModal(e, product.photos[0].files[2])}><ZoomIn sx={{color: '#d7d7d7', textShadow: '0px 0px 15px #000'}} /></IconButton></Box>
-                            <Box sx={{backgroundImage: `url(${product.photos[0].files[3]})`, width: '100%', backgroundPosition: 'center',  backgroundSize: '100% 100%', backgroundColor: '#eaeaea', backgroundBlendMode: 'darken',  display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', minHeight: {md: '200px', lg: '300px'}}}><IconButton className='show-img' onClick={(e) => showModal(e, product.photos[0].files[3])}><ZoomIn sx={{color: '#d7d7d7', textShadow: '0px 0px 15px #000'}} /></IconButton></Box>
+                            <Box sx={{backgroundImage: `url(${product.photos[0].files[0]})`, width: '100%', backgroundPosition: 'center', backgroundSize: '100% 100%', backgroundColor: '#eaeaea', backgroundBlendMode: 'darken', display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', minHeight: {xs: '300px', md: '200px', lg: '300px'}, minWidth: '80%',}}><IconButton className='show-img' onClick={(e) => showModal(e, product.photos[0].files[0])} ><ZoomIn sx={{color: '#d7d7d7', textShadow: '0px 0px 25px #000'}} /></IconButton></Box>
+                            <Box sx={{backgroundImage: `url(${product.photos[0].files[1]})`, width: '100%', backgroundPosition: 'center', backgroundSize: '100% 100%', backgroundColor: '#eaeaea', backgroundBlendMode: 'darken',  display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', minHeight: {xs: '300px', md: '200px', lg: '300px'}, minWidth: '80%',}}><IconButton className='show-img' onClick={(e) => showModal(e, product.photos[0].files[1])}><ZoomIn sx={{color: '#d7d7d7', textShadow: '0px 0px 15px #000'}} /></IconButton></Box>
+                            <Box sx={{backgroundImage: `url(${product.photos[0].files[2]})`, width: '100%', backgroundPosition: 'center',  backgroundSize: '100% 100%', backgroundColor: '#eaeaea', backgroundBlendMode: 'darken',  display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', minHeight: {xs: '300px', md: '200px', lg: '300px'}, minWidth: '80%',}}><IconButton className='show-img' onClick={(e) => showModal(e, product.photos[0].files[2])}><ZoomIn sx={{color: '#d7d7d7', textShadow: '0px 0px 15px #000'}} /></IconButton></Box>
+                            <Box sx={{backgroundImage: `url(${product.photos[0].files[3]})`, width: '100%', backgroundPosition: 'center',  backgroundSize: '100% 100%', backgroundColor: '#eaeaea', backgroundBlendMode: 'darken',  display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', minHeight: {xs: '300px', md: '200px', lg: '300px'}, minWidth: '80%',}}><IconButton className='show-img' onClick={(e) => showModal(e, product.photos[0].files[3])}><ZoomIn sx={{color: '#d7d7d7', textShadow: '0px 0px 15px #000'}} /></IconButton></Box>
                         </Box>
                     :
-                        product.photos.length > 0 ? 
+                        product?.photos[0].files.length > 1 ? 
+                            <Box sx={{display: 'flex', overflowX: 'scroll'}}>
+                                {
+                                    product?.photos[0].files.map(file => {
+                                        return <Box key={product.id} sx={{backgroundImage: `url(${file})`, backgroundPosition: 'center', backgroundSize: '100% 100%', backgroundColor: '#eaeaea', backgroundBlendMode: 'darken', display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', minHeight: {xs: '300px', lg: '300px'}, marginRight: '1em'}}><IconButton className='show-img' onClick={(e) => showModal(e, product.photos[0].files[0])} ><ZoomIn sx={{color: '#d7d7d7', textShadow: '0px 0px 25px #000'}} /></IconButton></Box>
+                                    }) 
+                                }
+                            </Box>
+                        :
+                        product.photos[0].files.length > 0 ?
                         <Box sx={{backgroundImage: `url(${product.photos[0].files[0]})`, width: '100%', backgroundPosition: 'center', height: {xs: '40vh', md: '60vh'}, backgroundSize: '100% 100%', backgroundColor: '#eaeaea', backgroundBlendMode: 'darken', maxWidth: {xs: '100%', xl: '80%'}, display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', }}><IconButton className='show-img' onClick={(e) => showModal(e, product.photos[0].files[0])} ><ZoomIn sx={{color: '#d7d7d7', textShadow: '0px 0px 25px #000'}} /></IconButton></Box>
                         :
-                        <Box></Box>
+                            <Box></Box>
                     }
                 </Box>
                 <Box sx={{width: '100%', textAlign: {md: 'center'}, display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
@@ -164,12 +173,7 @@ const Product = () => {
                             </AccordionSummary>
                             <AccordionDetails>
                                 <ul>
-                                    <li>Mesh Mid and Rear Panels</li>
-                                    <li>Rope Details</li>
-                                    <li>Adjustable Snap Closure</li>
-                                    <li>Embroidered Graphics With Raised Details</li>
-                                    <li>Curved Bill</li>
-                                    <li>Cotton Sweat Band</li>
+                                    {product?.details.map(detail => <li key={detail}>{detail}</li>)}
                                 </ul>
                             </AccordionDetails>
                         </Accordion>
@@ -181,7 +185,7 @@ const Product = () => {
                                 <ul>
                                     <li>Once your order has been processed you will receive a shipping confirmation email.</li>
                                     <li>Estimated delivery time begins when you receive your shipping confirmation email</li>
-                                    <li>Allow 5-7 business days to receive your order after receiving your confirmation email.</li>
+                                    <li>Allow 7-10 business days to receive your order after receiving your confirmation email.</li>
                                 </ul>
                             </AccordionDetails>
                         </Accordion>

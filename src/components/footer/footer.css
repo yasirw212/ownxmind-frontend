@@ -17,3 +17,9 @@
 .footer-container i {
     cursor: pointer;
 }
+
+@media only screen and (max-width: 600px) {
+    .footer-container {
+        font-size: .75rem;
+    }
+}

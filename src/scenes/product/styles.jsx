@@ -5,7 +5,8 @@ export const useStyles = () => {
     
     return {
         productContainer: {
-            
+            position: 'relative',
+            top: '-1vh',
             margin: '0 auto',
             overFlow: 'hidden',
             fontFamily: 'serif'
@@ -16,12 +17,15 @@ export const useStyles = () => {
             },
             width: '90%',
             margin: '0 auto',
-            overFlow: 'hidden'
+            overflowY: 'hidden',
+            overflowX: 'scroll'
         },
         imgDisplay: {
             width: '90%',
+            maxWidth: '800px',
             display: {
-                md: 'grid'
+                xs: 'flex',
+                sm: 'grid'
             },
             gridTemplate: 'auto auto / repeat(2, 1fr)',
             gridGap: '1rem'

@@ -4,6 +4,7 @@ import Navbar from "../components/navbar/Navbar"
 import Home from "../scenes/home/Home"
 import Shop from "../scenes/shop/Shop"
 import Product from "../scenes/product/Product"
+import Thankyou from "../scenes/thankyou/Thankyou"
 import Footer from "../components/footer/Footer"
 import '../styles.css'
 import { useDispatch, useSelector } from "react-redux"
@@ -46,6 +47,7 @@ function App() {
             <Route exact path="/" element={<Home />}></Route>
             <Route exact path="/shop/:category" element={<Shop />}></Route>
             <Route path="/shop/:category/:id" element={<Product />}></Route>
+            <Route path="/thankyou" element={<Thankyou />}></Route>
           </Routes>
           <SideBar />
           <Contact />
