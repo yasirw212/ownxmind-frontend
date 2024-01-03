@@ -7,7 +7,7 @@ export const getProducts = createAsyncThunk('/products/getProducts', async (arg,
         const {data} = await getAllProducts()
         
         if(data){
-            const response = await getAllPhotos()
+            
             let photos = []
             photos = [...hatsPhotos, ...bottomsPhotos, ...topsPhotos]
             let obj = {hats: [], tops: [], bottoms: []}
@@ -23,7 +23,6 @@ export const getProducts = createAsyncThunk('/products/getProducts', async (arg,
                     } else if(item.category == 'tops'){
                         obj = {...obj, tops: [...obj.tops, item]}
                     }
-                    
                 })
                 return obj
             }
@@ -57,7 +56,7 @@ const options = {
         },
         [getProducts.rejected]: (state, {payload}) => {
             state.isLoadingProducts = false
-            state.failedToGetProducts = truee
+            state.failedToGetProducts = true
         }
     }
 }

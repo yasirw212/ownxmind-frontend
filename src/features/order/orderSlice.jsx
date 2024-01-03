@@ -10,8 +10,6 @@ export const retrieveData = createAsyncThunk("/order/retrieveData", async (arg, 
     }
 })
 
-
-
 const options = {
     name: 'order',
     initialState: {
@@ -31,31 +29,37 @@ const options = {
         },
         adjustItemQuantity: (state, {payload}) => {
             let itemsArr = [...state.items]
-            const {id, name, price, photos, stripe_code} = payload.product
-            console.log(payload)
-            const items = [...state.items]
-            console.log(id)
-            const itemIndex = itemsArr.findIndex(item => item.id == id)
-            if(itemIndex !== -1){
-                if(payload.method == '+') {
-                    itemsArr[itemIndex].quantityInCart += payload.quantity
-                } else if(payload.method == "-") {
-                    if(payload.quantity !== 0) {
-                        itemsArr[itemIndex].quantityInCart -= 1
+            const {id, name, price, photos, selectedSize} = payload.product
+
+            const itemIndex = itemsArr.findIndex(item => item.selectedSize.stripe_code == selectedSize.stripe_code)
+            
+            itemsArr = JSON.parse(JSON.stringify(itemsArr))
+
+            if(itemIndex !== -1 ){
+
+                itemsArr = JSON.parse(JSON.stringify(itemsArr))
+                if(itemsArr[itemIndex].selectedSize.stripe_code == selectedSize.stripe_code){
+                    if(payload.method == '+') {
+                        itemsArr[itemIndex].quantityInCart += payload.quantity
+                    } else if(payload.method == "-") {
+                        if(payload.quantity !== 0) {
+                            itemsArr[itemIndex].quantityInCart -= 1
+                        }
+                        if(itemsArr[itemIndex].quantityInCart == 0 || payload.quantity == 0) {
+                            itemsArr.splice(itemIndex, 1)
+                        }
                     }
-                    if(itemsArr[itemIndex].quantityInCart == 0 || payload.quantity == 0) {
-                        itemsArr.splice(itemIndex, 1)
-                    }
+                } else {
+                    itemsArr.push({id: id, name: name, price: price, photos: photos, quantityInCart: 1, selectedSize: {size: selectedSize.size, stripe_code: selectedSize.stripe_code}})
                 }
             } else {
-                itemsArr.push({id: id, name: name, price: price, photos: photos, quantityInCart: 1, productCode: stripe_code})
+                itemsArr.push({id: id, name: name, price: price, photos: photos, quantityInCart: 1, selectedSize: {size: selectedSize.size, stripe_code: selectedSize.stripe_code}})
             }
             state.items = [...itemsArr]
             updateSessionData(itemsArr)
         },
         updateCartQuantity: (state, {payload}) => {
             let numItems = 0
-            console.log(state.cartQuantity)
             state.items.map(item => numItems += item.quantityInCart)
             state.cartQuantity = numItems                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
         } 
@@ -67,7 +71,6 @@ const options = {
         },
         [retrieveData.fulfilled]: (state, {payload}) => {
             state.loadingData = false
-            console.log(payload)
             state.items = [...payload]
             state.failedToLoadData = false
         },

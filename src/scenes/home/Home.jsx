@@ -1,12 +1,8 @@
-import React from 'react'
 import './home.css'
 import { useSelector } from 'react-redux'
 import { selectProducts } from '../../features/products/productsSlice'
 import ItemCard from '../../components/item/ItemCard'
-import { Typography, Box } from '@mui/material'
 import { KeyboardDoubleArrowDown } from '@mui/icons-material'
-import { Link } from 'react-router-dom'
-
 
 const Home = () => {
   const products = useSelector(selectProducts)

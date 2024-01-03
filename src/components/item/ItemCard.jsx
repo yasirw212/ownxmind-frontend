@@ -35,13 +35,13 @@ const ItemCard = ({item, img, category, page}) => {
             </Typography>
         </CardContent>
         <CardActions sx={styles.cardActions}>
-            <Button sx={page == 'home' ? styles.homeButton : styles.button} className={'add-item'} onClick={() => dispatch(adjustItemQuantity({product: item, method: '+', quantity: 1}))} variant="contained"   >
+            {/* <Button sx={page == 'home' ? styles.homeButton : styles.button} className={'add-item'} onClick={() => dispatch(adjustItemQuantity({product: item, method: '+', quantity: 1}))} variant="contained"   >
                 <Typography  sx={styles.buttonText}>
                     Add to cart
                 </Typography>
-            </Button>
-            <Button sx={page == 'home' ? styles.homeButton : styles.button}  variant="outlined" >
-                <Link to={`/shop/${item.category}/${item.id}`} style={{textDecoration: 'none', padding: '0', color: '#131313'}}>   
+            </Button> */}
+            <Button sx={page == 'home' ? styles.homeButton : styles.button}  variant="contained" >
+                <Link to={`/shop/${item.category}/${item.id}`} style={{textDecoration: 'none', padding: '0', color: '#fff'}}>   
                     <Typography  sx={styles.buttonText}color={''} >
                         View More
                     </Typography>

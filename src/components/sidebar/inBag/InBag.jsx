@@ -1,4 +1,3 @@
-import React from 'react'
 import { Remove, Add } from '@mui/icons-material'
 import { IconButton, Button } from '@mui/material'
 import { adjustItemQuantity } from '../../../features/order/orderSlice'
@@ -6,7 +5,7 @@ import { useDispatch } from 'react-redux'
 
 const InBag = ({item}) => {
   const dispatch = useDispatch()
-
+    // console.log(item)
   return (
     <div className="item-card" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #d7d7d7', paddingBottom: '.25em', marginTop: ''}}>
         <div style={{display: 'flex', alignItems: 'center'}}>
@@ -16,6 +15,7 @@ const InBag = ({item}) => {
             </div>
             <div style={{marginLeft: '1.25em'}}>
                 <p className="item-title" style={{marginTop: '1rem', fontFamily: 'darkpix'}} >{item.name}</p>
+                <p style={{fontFamily: 'darkpix'}}>{item.selectedSize.size}</p>
                 <div className="price" style={{display: 'flex'}}>
 
                     <IconButton  onClick={()=> dispatch(adjustItemQuantity({product: item, method: '-', quantity: 1}))} >

@@ -1,6 +1,6 @@
 import React from 'react'
 import './product.css'
-import { Box, List, ListItem, ListItemText, Typography, Button, IconButton, Container } from '@mui/material'
+import { Box, Typography, Button, IconButton} from '@mui/material'
 import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import { selectProducts } from '../../features/products/productsSlice'
@@ -10,7 +10,7 @@ import { useStyles } from './styles'
 import { getProducts } from '../../features/products/productsSlice'
 import { Accordion, AccordionDetails, AccordionSummary }from '@mui/material'
 import { ExpandMore, MailOutline, Instagram, ZoomIn, Close } from '@mui/icons-material'
-import $, { event, ready } from 'jquery'
+import $ from 'jquery'
 
 
 const Product = () => {
@@ -18,14 +18,15 @@ const Product = () => {
     const [relatedItems, setRelatedItems] = React.useState([])
     const [width, setWidth] = React.useState(0)
     const [modalImg, setModalImg] = React.useState('')
-    const [count, setCount] = React.useState(0)
+    const [size, setSize] = React.useState({})
     const products = useSelector(selectProducts)
     const params = useParams()
     const styles = useStyles()
     const dispatch = useDispatch()
 
     const addToBag = () => {
-        dispatch(adjustItemQuantity({product: product, method: '+', quantity: 1}))
+        
+        dispatch(adjustItemQuantity({product: {...product, selectedSize: {size: size.size, stripe_code: size.stripe_code}}, method: '+', quantity: 1}))
     }
 
     $(document).ready(() => { 
@@ -37,12 +38,6 @@ const Product = () => {
             $('.order-sidebar').fadeIn(500)
         })
       }) 
-
-    const handleScreenPos = () => {
-        if(window.scrollY > 65){
-            document.getElementById('button-div').style.position = 'relative'
-        }
-    }
 
     window.addEventListener('scroll', () => {
         if(window.scrollY < 250 && window.innerWidth < 900 ){
@@ -74,6 +69,8 @@ const Product = () => {
             await setProduct(products.bottoms.find(p => p.id == params.id))
             await setRelatedItems(products.bottoms.filter(p => p.id !== product.id))
         }
+        
+        setSize({size: product.sizes[2].size, stripe_code: product.sizes[2].stripe_code})
     }
 
     const getRelated = async () => {
@@ -87,7 +84,6 @@ const Product = () => {
     }
 
     const showModal = (event, img) => {
-        console.log(event)
         $(document).ready(() => {
             $('.show-img').on('click', () => $('.modal-div').addClass('active'))
         })
@@ -100,6 +96,7 @@ const Product = () => {
 
     React.useEffect(() => {
         getProduct()
+        setSize(size)
     }, [products, params])
 
     React.useEffect(() => {
@@ -114,11 +111,11 @@ const Product = () => {
         product ?
         <>
         <Box className='modal-div' sx={{background: 'rgba(0, 0, 0, .5)',  position: 'fixed', top: 0, right: 0, left: '0%', bottom: 0,  zIndex: 999, justifyContent: 'center', height: '100vh', width: '100vw'}}>
-            <IconButton className='close-modal' onClick={() => setModalVisible(false)} sx={{position: 'absolute', right: '3%', top: '3%'}} ><Close sx={{color: '#d7d7d7'}} /></IconButton>
+            <IconButton className='close-modal' sx={{position: 'absolute', right: '3%', top: '3%'}} ><Close sx={{color: '#d7d7d7'}} /></IconButton>
             <img src={modalImg} alt="" className='modal-img' style={{margin: '0 auto', position: 'relative'}} />
         </Box>
             <nav className='pt-4'>
-                <ol className="breadcrumb" separator={'>'}>
+                <ol className="breadcrumb" >
                     <li style={{margin: '0', padding: 0}}   className="breadcrumb-item "><Link className="text-dark" to={'/'}>OWN X MIND</Link></li>
                     <li className="breadcrumb-item"><Link className="text-dark" to={`/shop/${product.category}`}>PRODUCTS</Link></li>
                     <li className="breadcrumb-item active">{product.name}</li>
@@ -146,10 +143,21 @@ const Product = () => {
                     <Typography  sx={{fontFamily: 'darkPix', marginTop: {xs: '1.5rem', md: 0}, fontSize: {xs: '1rem', md: '1.25rem'}}}>
                         {`${product.name} OWN X MIND  ${product.category == 'hats' ? 'TRUCKER HAT' : product.category == 'bottoms' ? 'SWEATS' : 'TEE'}`}
                     </Typography>
+                    {
+                        product.category !== 'hats' ?
+                        <select onChange={(e) => setSize( product.sizes.find(s => s.size == e.target.value))} name="size" id="size">
+                            <option value="medium">M</option>
+                            <option value="small">S</option>
+                            <option value="large">L</option>
+                            <option value="xl">XL</option>
+                        </select>
+                        :
+                        null
+                    }
                     <Typography sx={{textAlign: {xs: 'left', md: 'center'}, marginTop: '.5rem', fontSize: {xs: '1rem', sm: '1.25rem'}, fontFamily: 'serif'}} >
                         {`$${product.price}`}
                     </Typography>
-                    <Box sx={{textAlign: 'left', marginTop: '1rem'}} >
+                    <Box sx={{textAlign: 'left', marginTop: '1rem', marginBottom: '1rem'}} >
                         <Accordion>
                             <AccordionSummary expandIcon={<ExpandMore />}>
                                 <Typography >Details</Typography>
@@ -198,12 +206,12 @@ const Product = () => {
                     </Box>
                 </Box>
             </Box>
-            <Box sx={{maxWidth: '1300', width: '90%', margin: '0rem auto 0 auto'}}>
+            <Box sx={{maxWidth: '1300', width: '90%', margin: '1rem auto 0 auto'}}>
                 <Typography variant={'h5'} sx={{fontFamily: 'darkPix', textAlign: {xs: 'left'}, marginTop: {md: '3rem'}, marginBottom: '.5rem'}}>
                     Related
                 </Typography>
                 <Box> 
-                    {relatedItems.slice(0, 2).map(item => <Link to={`/shop/${item.category}/${item.id}`} style={{marginRight: '1rem', marginTop: '.5rem', borderRadius: '8px'}}><img className={'related-img'} src={item.photos[0].files[0]} alt="" /></Link> )}
+                    {relatedItems.slice(0, 2).map(item => <Link key={item.id} to={`/shop/${item.category}/${item.id}`} style={{marginRight: '1rem', marginTop: '.5rem', borderRadius: '8px'}}><img className={'related-img'} src={item.photos[0].files[0]} alt="" /></Link> )}
                 </Box>
             </Box>
         </>

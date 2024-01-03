@@ -1,24 +1,22 @@
 import React from 'react'
 import InBag from './inBag/InBag'
-import $ from 'jquery'
 import {FaCcVisa} from 'react-icons/fa'
 import {FaCcAmex} from 'react-icons/fa'
 import {FaCcMastercard} from 'react-icons/fa'
 import {FaCcApplePay} from 'react-icons/fa'
 import {FaCcDiscover} from 'react-icons/fa'
 import { IconButton } from "@mui/material";
-import { Close, DisplaySettings } from "@mui/icons-material";
+import { Close} from "@mui/icons-material";
 import { selectItems, selectTotal, getTotal } from '../../features/order/orderSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import './sidebar.css'
 
 const SideBar = () => {
-  const [order, setOrder] = React.useState([])
   const [cartEmpty, setCartEmpty] = React.useState(true)
-  const [lineItems, setLineItems] = React.useState([])
   const dispatch = useDispatch()
   const items = useSelector(selectItems)
   const total = useSelector(selectTotal)
+//   console.log(items)
   let stripe = Stripe(
     "pk_live_51MuOGSKu1s29bXse3vikPjV8tIL9rq1N2ccFntq96Dl8NIVOtKnr8Ppu35LaB0i9ukzO8k9ChDqN8ILZGDUjiZu300ksLCSXrL"
    )
@@ -30,7 +28,7 @@ const SideBar = () => {
     items.forEach((item)=>{
         line_items.push(
             {
-                price: item.productCode,
+                price: item.selectedSize.stripe_code,
                 quantity: item.quantityInCart
             }
         )
@@ -76,7 +74,7 @@ const SideBar = () => {
                     </div> 
                     :
                         <div className="order-items">
-                            {items.map(item => <InBag item={item} />)}
+                            {items.map(item => <InBag key={item.id} item={item} />)}
                         </div>
                 }
             </div>
