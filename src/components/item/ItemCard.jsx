@@ -23,7 +23,7 @@ const ItemCard = ({item, img, category, page}) => {
 
   return (
     <Card key={item.id} className='card-container' sx={{boxShadow: '0px 0px 5px #131313', background: item.category == 'hats' ? "" : '', border: item.category == 'hats' ? '7px solid #fff' : ''}}>
-        <CardMedia sx={{maxWidth: {xs: '375px'}}} >
+        <CardMedia sx={{maxWidth: {xs: '375px'}, maxHeight: {xs: '200px'}}} >
             <img width={'100%'}   className={`card-img ${item.category == 'hats' ? 'hat-img' : 'product-img'}`} src={item.photos[0].files[0]} alt="" />
         </CardMedia>
         <CardContent sx={styles.cardContent}>
