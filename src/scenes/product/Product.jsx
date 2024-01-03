@@ -145,7 +145,7 @@ const Product = () => {
                     </Typography>
                     {
                         product.category !== 'hats' ?
-                        <select onChange={(e) => setSize( product.sizes.find(s => s.size == e.target.value))} name="size" id="size">
+                        <select style={{color: '#131313'}} onChange={(e) => setSize( product.sizes.find(s => s.size == e.target.value))} name="size" id="size">
                             <option value="medium">M</option>
                             <option value="small">S</option>
                             <option value="large">L</option>
