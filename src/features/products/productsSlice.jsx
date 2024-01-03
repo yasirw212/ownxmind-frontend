@@ -5,7 +5,7 @@ import { hatsPhotos, bottomsPhotos, topsPhotos } from "../../data/data";
 export const getProducts = createAsyncThunk('/products/getProducts', async (arg, {rejectWithValue}) => {
     try {
         const {data} = await getAllProducts()
-        
+        console.log(data)
         if(data){
             
             let photos = []

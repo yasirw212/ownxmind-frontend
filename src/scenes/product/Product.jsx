@@ -18,15 +18,19 @@ const Product = () => {
     const [relatedItems, setRelatedItems] = React.useState([])
     const [width, setWidth] = React.useState(0)
     const [modalImg, setModalImg] = React.useState('')
-    const [size, setSize] = React.useState({})
+    const [size, setSize] = React.useState(false)
     const products = useSelector(selectProducts)
     const params = useParams()
     const styles = useStyles()
     const dispatch = useDispatch()
 
-    const addToBag = () => {
-        
-        dispatch(adjustItemQuantity({product: {...product, selectedSize: {size: size.size, stripe_code: size.stripe_code}}, method: '+', quantity: 1}))
+    const addToBag = async () => {
+        if(!size){
+            dispatch(adjustItemQuantity({product: {...product, selectedSize: {size: params.category == "hats" ? null : "medium", stripe_code: params.category == "hats" ? product.sizes[0].stripe_code : product.sizes[2].stripe_code}}, method: '+', quantity: 1}))
+        } else {
+            console.log('v2')
+            dispatch(adjustItemQuantity({product: {...product, selectedSize: {size: size.size, stripe_code: size.stripe_code}}, method: '+', quantity: 1}))
+        }
     }
 
     $(document).ready(() => { 
@@ -60,7 +64,6 @@ const Product = () => {
     const getProduct = async () => {
         if(params.category == 'hats'){ 
             await setProduct(products.hats.find(p => p.id == params.id))
-            
            setRelatedItems(products.hats.filter(p => p.id !== product.id))
         } else if(params.category == 'tops'){
             await setProduct(products.tops.find(p => p.id == params.id))
@@ -69,8 +72,6 @@ const Product = () => {
             await setProduct(products.bottoms.find(p => p.id == params.id))
             await setRelatedItems(products.bottoms.filter(p => p.id !== product.id))
         }
-        
-        setSize({size: product.sizes[2].size, stripe_code: product.sizes[2].stripe_code})
     }
 
     const getRelated = async () => {
@@ -96,7 +97,6 @@ const Product = () => {
 
     React.useEffect(() => {
         getProduct()
-        setSize(size)
     }, [products, params])
 
     React.useEffect(() => {
