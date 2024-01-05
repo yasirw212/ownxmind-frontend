@@ -47,7 +47,7 @@ function App() {
             <Route exact path="/" element={<Home />}></Route>
             <Route exact path="/shop/:category" element={<Shop />}></Route>
             <Route path="/shop/:category/:id" element={<Product />}></Route>
-            <Route path="/thankyou" element={<Thankyou />}></Route>
+            <Route path="/processed" element={<Thankyou />}></Route>
           </Routes>
           <SideBar />
           <Contact />

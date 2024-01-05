@@ -42,7 +42,7 @@ const SideBar = () => {
             lineItems: line_items,
             mode: "payment",
             successUrl: "https://ownxmind.netlify.app/processed",
-            cancelUrl: "https://ownxmind.netlify.app/",
+            cancelUrl: "https://ownxmind.netlify.app/processed",
         }).then(function(result){
             alert(result)
         });

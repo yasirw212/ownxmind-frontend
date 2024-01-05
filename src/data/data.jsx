@@ -52,7 +52,7 @@ import pinkPants from '../assets/pinkpants.jpeg'
 import blackShirt1 from '../assets/blackshirt1.jpeg'
 import blackShirt2 from '../assets/blackshirt2.jpeg'
 import whiteShirt1 from '../assets/whiteshirt1.jpeg'
-import whiteShirt2 from '../assets/whiteshirt1.jpeg'
+import whiteShirt2 from '../assets/whiteshirt2.jpeg'
  
 export const topsPhotos = [
     {

@@ -32,7 +32,7 @@ export default function Contact(props){
                         </form>
                     </div>
                     <div className="modal-footer text-center" style={{border: 'none', display: 'flex', justifyContent: 'center', fontSize: '1rem'}}>
-                    <a href="https://www.instagram.com/ownmind.1/"  target={"_blank"} className="text-dark"><i className="bi bi-instagram"></i></a>
+                    <a href="mailto:ownmindtm@icloud.com?Subject=Customer Support" rel="noreferrer"  target={"_top"} className="text-dark"><i className="bi bi-instagram"></i></a>
                      
                     </div>
                 </div>
